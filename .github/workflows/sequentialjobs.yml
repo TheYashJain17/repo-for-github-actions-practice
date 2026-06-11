@@ -1,0 +1,21 @@
+name: sequential job
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build step
+        run: echo "building the project"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test step
+        run: echo "testing the project"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy step
+        run: echo "Deploying the project"
