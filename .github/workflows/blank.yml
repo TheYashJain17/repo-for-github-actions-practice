@@ -7,4 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GoodBye Step
-        run: echo "GoodBye World From Github Action"
+        run: | 
+          echo "GoodBye World From Github Action from line 1"
+          echo "GoodBye world from github actions from line 2"
+        
