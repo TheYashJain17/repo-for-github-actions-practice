@@ -1,0 +1,10 @@
+name: "GoodBye World"
+
+on: workflow_dispatch
+
+jobs:
+  goodbye:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GoodBye Step
+        run: echo "GoodBye World From Github Action"
