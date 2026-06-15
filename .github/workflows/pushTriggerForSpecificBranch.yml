@@ -1,0 +1,15 @@
+name: Push Trigger For Specific Branch
+on: # now here we are specifying that only trigger on push event when the push has been made to the branch or branches defined here , can define multiple branches also
+  push: #if push made to any branch other than these then the workflow wont get triggered
+    branches:
+      - main 
+      - dev
+      - stage
+      - 'feature/**' # this is also accepted and this means any branch name starting with release will trigger the workflow if push has been made to that branch    
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Step
+        run: echo "Testing Project"
