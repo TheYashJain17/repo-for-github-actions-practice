@@ -1,23 +1,21 @@
-name: practice workflow
-
+name: practice workfow  
 on: workflow_dispatch
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: build step
+      - name: Build Step 
         run: echo "Building Project"
 
   test:
     runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: test step
+      - name: Test Step
         run: echo "Testing Project"
+
   deploy:
     runs-on: ubuntu-latest
-    needs: test
     steps:
-      - name: deploy step
+      - name: Deploy Step
         run: echo "Deploying Project"
