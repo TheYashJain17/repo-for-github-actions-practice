@@ -1,0 +1,9 @@
+name: Push Trigger Workflow 
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Step
+        run: echo "Building Project"
