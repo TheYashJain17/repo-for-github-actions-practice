@@ -1,7 +1,7 @@
 name: Push Trigger Workflow 
 on: push #here we specified push which means this workflow would be trigger when we push the code in this repo
 
-# on: ["push","pull_request"] #thats how we can define multiple triggers for a github action workflow , now this will be executed either when there will be a push in the repo or someone will make a pull request to any branch , and can do for many more similar like this
+# on: ["push","pull_request"] #thats how we can define multiple triggers for a github action workflow , now this will be executed either when there will be a push in the repo or someone will take a pull from the repo , and can do for many more similar like this
 
 jobs:
   build:
