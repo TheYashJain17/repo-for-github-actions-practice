@@ -1,0 +1,12 @@
+name: Pull Request Trigger
+on: 
+  pull_request: # thats how we define a workflow for pull_request , we defined the branch as main , now if there would be a PR raised against main branch then this workflow will get triggered
+    branches: # can define multiple branches if want to , just make sure this workflow should already exists in the existing code and not in any feature branch or any other branch , then only when there would be any push and a PR , this will get triggered
+      - main
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Step
+        run: echo "Deploying Project"
