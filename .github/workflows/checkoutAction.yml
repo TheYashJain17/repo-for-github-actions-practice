@@ -1,0 +1,22 @@
+#In this ,we are seeing the github predefined actions, specifically checkout action, this is the not checkout
+#we usually use while checking out from one branch to another this one is different
+#As with the help of this checkout action we can make our repo code available on the runner we choose
+#Like here our runner is ubuntu-latest , it is a fresh machine which do not have any information regarding 
+#our code, so if we want to do anything with the repo then we have to make sure to make the code available
+#to the runner and for that we use checkout action of the github , without it code won't be available
+#to the runner , and lets say in this case we are printing the content of index.html , if we don't do
+#checkout action, then we will get nothing while printing the content of index.html. therefore whenever 
+# we wants to do anything with our code , make sure to make it available to the runner on which pipeline 
+#is running.
+
+name: Github Checkout Action
+on: push
+
+jobs:
+  checkout-action-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout The Code Action 
+        uses: actions/checkout@v4 #when we use action , we use the keyword uses and then the action name, make sure to put the exact name as it is mentioned here , check the documentation for more info.
+      - name: Print index.html file 
+        run: cat index.html
