@@ -26,6 +26,12 @@ on: push
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: Test
+      AWS_SECRET_ACCESS_KEY: Test
+      AWS_DEFAULT_REGION: us-east-1
+
     steps:
       - name: Checkout Code From Repo
         uses: actions/checkout@v4 
