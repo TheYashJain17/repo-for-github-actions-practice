@@ -1,0 +1,45 @@
+#This whole workflow is for deploying a static website to Real AWS S3 bucket , we will use predefined github actions for doing this.
+
+#name: Deploy Static Website To Real AWS S3 Bucket
+#on: workflow_dispatch
+
+#jobs:
+  #deploy:
+    #runs-on: ubuntu-latest
+    #steps:
+     # - name: Checkout Code From Repo 
+      #  uses: actions/checkout@v4 # we already knew about this , as we have studied about this , this action will help us to copy the repo on the runner.
+      #- name: Configure AWS Credentials
+     #   uses: aws-action/configure-aws-credentials@v4 #this action helps us to configure the aws credentials , as we have to provide s3 bucket access to the workflow then only it would be executed
+      #  with: #with keyword is used when we have to pass some parameters with an action , like we are passing aws-access-key-id and aws-secret-access-key
+     #     aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}} #using secrets which we have already ready about so configure the required secrets in the repo itself
+     #     aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+     #     aws-region: 'us-west-1'
+
+
+
+#As we dont have real AWS account atleast for now , we will move ahead With Floci , which is a cloud emulator and for that workflow code is different
+
+name: Deploy Static Website to Floci AWS S3 Bucket
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code From Repo
+        uses: actions/checkout@v4 
+
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+          unzip awscliv2.zip
+          sudo ./aws/install
+
+      - name: Upload Website To S3
+        run: |
+          aws s3 cp index.html s3://my-static-website/index.html --endpoint-url=http://host.docker.internal:4566
+
+      - name: Sync Website Files
+        run: |
+          aws s3 sync ./website s3://my-static-website/ --delete --endpoint-url=http://host.docker.internal:4566
