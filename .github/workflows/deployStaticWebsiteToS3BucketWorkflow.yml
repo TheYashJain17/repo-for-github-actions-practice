@@ -30,11 +30,12 @@ jobs:
       - name: Checkout Code From Repo
         uses: actions/checkout@v4 
 
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
-          unzip awscliv2.zip
-          sudo ./aws/install
+  #this step is to install the aws cli on the runner , but mostly runners already have aws cli preinstalled so only use this wherever required
+      #- name: Install AWS CLI
+      #  run: |
+      #    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o awscliv2.zip
+      #    unzip awscliv2.zip
+      #    sudo ./aws/install
 
       - name: Upload Website To S3
         run: |
