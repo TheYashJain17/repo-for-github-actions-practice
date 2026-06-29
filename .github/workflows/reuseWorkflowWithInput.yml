@@ -1,0 +1,28 @@
+#This is like a template , which can take user input and can behave accordingly , 
+#so we don't have to make multiple workflows of similar kind
+
+name: Reusable Workflow 
+on: #when we are making reusable workflow and taking user input , the only on expression should be workflow_dispatch , push or any other wont work as we have to take user input..
+  workflow_dispatch: #now under workflow_dispatch we will define the inputs
+    inputs: # here using the inputs keyword
+      environment: # providing the name of the input 
+        description: Choose An Environment To Deploy # description of the input
+        required: true #by doing required true means it is necessary to run this workflow 
+        default: dev #setting the default value to dev
+        options: # here we are using options keyword, use this when you want to show a list to the user instead of making user write, then providing the options as list under this keyword
+          - dev
+          - test
+          - prod
+        type: choice #when using options keyword, make sure to provide the type as choice then only we will get the list else will get an error
+      tag: #here we are taking another input of name tag
+        description: Choose The Git Tag To Deploy #same as above
+        required: true #same as above
+
+jobs:
+  UserInput:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy The App 
+        run: echo "Deploying The tag ${{ inputs.tag }} Application To ${{ inputs.environment }}" #now here we are accessing the values provided by the user by targeting the input and then the particular variable name like environment and tag which we defined. 
+
+ 

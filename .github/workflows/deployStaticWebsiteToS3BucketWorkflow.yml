@@ -23,7 +23,8 @@
 #this one also will only work if we host the github runner on our system , because github runner is on another vm and our floci is on our computer
 #therefore github wont be able to connect with this one, therefore give preference to real AWS whenever get one , try with it
 name: Deploy Static Website to Floci AWS S3 Bucket
-on: push
+# on: push
+on: workflow_dispatch
 
 jobs:
   deploy:
