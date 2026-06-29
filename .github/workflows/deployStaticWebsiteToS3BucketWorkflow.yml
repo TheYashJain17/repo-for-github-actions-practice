@@ -20,6 +20,8 @@
 
 #As we dont have real AWS account atleast for now , we will move ahead With Floci , which is a cloud emulator and for that workflow code is different
 
+#this one also will only work if we host the github runner on our system , because github runner is on another vm and our floci is on our computer
+#therefore github wont be able to connect with this one, therefore give preference to real AWS whenever get one , try with it
 name: Deploy Static Website to Floci AWS S3 Bucket
 on: push
 
@@ -27,7 +29,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
+    env: #this is how we define env variables in github workflow
       AWS_ACCESS_KEY_ID: Test
       AWS_SECRET_ACCESS_KEY: Test
       AWS_DEFAULT_REGION: us-east-1
