@@ -1,0 +1,18 @@
+#In this code , we are seeing how to access context variables values , like we access secrets , similarly there is github object and more
+#This is a simple workflow just accessing the context variables , refer the documentation for more info
+
+name: Context Variables Values 
+on: workflow_dispatch
+
+jobs:
+  context-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Context Variables 
+        run: |
+          echo "This workflow is triggered by ${{ github.actor }}" #here accessing the github object to see who triggered the workflow with .actor
+          echo "The repository name is ${{ github.repository }}" #github.repository will give us the name of the repo
+          echo "The branch name is ${{ github.ref_name }}" #and github.ref_name will give us the branch name of the repo
+
+      - name: Print All variable names under github 
+        run: echo "echo ${{toJson(github)}}" #here we are printing all the values present under github object and using in built tool toJson which will convert the result into actual json object.
