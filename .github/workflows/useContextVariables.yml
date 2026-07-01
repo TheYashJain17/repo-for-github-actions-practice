@@ -19,3 +19,6 @@ jobs:
 
       - name: Print environment variables
         run: printenv #this will return all the available environment variables
+
+      - name: Print Particular Environment Variable
+        run: echo "$GITHUB_SHA" #this will return us the latest commit id, and this is the format in which we print particular environment varianble it is different from printing context variables
