@@ -16,3 +16,6 @@ jobs:
 
       - name: Print All variable names under github 
         run: echo "echo ${{toJson(github)}}" #here we are printing all the values present under github object and using in built tool toJson which will convert the result into actual json object.
+
+      - name: Print environment variables
+        run: printenv #this will return all the available environment variables
