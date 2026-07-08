@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Build Step 
         id: step1
-        run: echo "version=0.0.1" 
+        run: echo "version=0.0.1" >> $GITHUB_OUTPUT
 
   deploy:
     runs-on: ubuntu-latest
