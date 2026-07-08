@@ -21,14 +21,15 @@
 
 #Now lets see how can we share data between 2 jobs
 
+#Everything else is same as before , just only few changes for managing the value at global level so that can access in another job
 
 name: Output in Workflow 
 on: workflow_dispatch
 
 jobs:
   build:
-    outputs:
-      globalVersion: ${{ steps.step1.outputs.version }}
+    outputs: #here we defined outputs tag on the job level
+      globalVersion: ${{ steps.step1.outputs.version }} #here we declare a variable , name could be anything not necessary to match it with the local variable name like here in this it is version but we can use any name , now for the value , we are initializing the value inside steps that too in particular step , so there first accessing steps then using step id so that can target particular step then using outputs which we can use because using $GITHUB_OUTPUT this lets us access the outputs and then variable name which defined inside step and thats it we will get the value which we are initializing inside the step.
     runs-on: ubuntu-latest
     steps:
       - name: Build Step 
@@ -37,7 +38,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build #using needs because we know jobs start running in parallel , so we are saying this job needs build job first, thats how this will run after build job
     steps:
       - name: Deploy Step
-        run: echo "We are deploying the app on the version ${{ needs.build.outputs.globalVersion }}"
+        run: echo "We are deploying the app on the version ${{ needs.build.outputs.globalVersion }}" #now finally here we are accessing the value which we defined in first job , accessing needs because our we need build job then name of the job then again outputs because we stored the value in the first job with the help of this and then finally the variable name which we defined at global level in the first job and thats it , thats how we can access the data from another job into this job.
