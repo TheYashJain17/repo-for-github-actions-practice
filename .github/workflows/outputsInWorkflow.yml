@@ -1,16 +1,43 @@
 #In this workflow we are seeing how can we use value of 1 step into another or value of 1 job into another job , we will use outputs for this
 #Initially just a normal workflow
 
-name: Output In Workflow 
+#This is for sharing data between steps
+
+# name: Output In Workflow 
+# on: workflow_dispatch
+
+# jobs:
+#   job1:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Step one
+#         id: stepone #here providing id in the step so that can create an identifier to access this step
+#         run: echo "version=0.0.1" >> $GITHUB_OUTPUT #now here we are echoing the value means storing the value we want to use in another step for here in the $GITHUB_OUTPUT file, this is a special file provided by github so that can save output into this , so use this file only as it is reserved and thats how only would be able to use outputs
+
+#       - name: Step two #now we are in step two and now here we will access the value we stored in step 1
+#         run: echo "The version is ${{ steps.stepone.outputs.version }}" #the syntax is similar to of variables , accessing steps then the id we defined then outputs which is reserved keyword as we used $GITHUB_OUTPUT file thats why able to use it and then the key name which is version in this case.
+
+
+
+#Now lets see how can we share data between 2 jobs
+
+
+name: Output in Workflow 
 on: workflow_dispatch
 
 jobs:
-  job1:
+  build:
+    outputs:
+      globalVersion: ${{ steps.step1.outputs.version }}
     runs-on: ubuntu-latest
     steps:
-      - name: Step one
-        id: stepone #here providing id in the step so that can create an identifier to access this step
-        run: echo "version=0.0.1" >> $GITHUB_OUTPUT #now here we are echoing the value means storing the value we want to use in another step for here in the $GITHUB_OUTPUT file, this is a special file provided by github so that can save output into this , so use this file only as it is reserved and thats how only would be able to use outputs
+      - name: Build Step 
+        id: step1
+        run: echo "version=0.0.1" 
 
-      - name: Step two #now we are in step two and now here we will access the value we stored in step 1
-        run: echo "The version is ${{ steps.stepone.outputs.version }}" #the syntax is similar to of variables , accessing steps then the id we defined then outputs which is reserved keyword as we used $GITHUB_OUTPUT file thats why able to use it and then the key name which is version in this case.
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy Step
+        run: echo "We are deploying the app on the version ${{ needs.build.outputs.globalVersion }}"
