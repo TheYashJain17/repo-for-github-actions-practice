@@ -1,0 +1,20 @@
+#In this workflow we are going to see how to use or condition , like we can conditionally make a step run.
+
+name: Or Condition Workflow 
+on: #on push we are saying only run this workflow if the branch includes one of the below
+  push: 
+    branches: 
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: "Trigger this for Lucifer Or YashJain"
+        if: github.actor == 'Lucifer' || github.actor == 'TheYashJain17' #for making a or condition will still use if keyword , and will use OR operator ( || ) , and like we do check the or condition similarly doing here also , github.actor gives us the name which has pushed the changes therefore using that.
+        run: echo "Running for selected users only"
+
+      - name: "Always Run"
+        run: echo "Running Always"

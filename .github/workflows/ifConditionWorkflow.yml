@@ -1,11 +1,11 @@
 #In this workflow we are going to see how to use if condition , like we can conditionally make a step run.
 
 name: If Condition Workflow 
-on: #on push we are saying only run this workflow if the branch includes one of the below
-  push: 
-    branches: 
-      - main
-      - dev
+on: workflow_dispatch #on push we are saying only run this workflow if the branch includes one of the below
+  # push: #commenting out this so that this wont run everytime i push something to github 
+  #   branches: 
+  #     - main
+  #     - dev
 
 jobs:
   build:
