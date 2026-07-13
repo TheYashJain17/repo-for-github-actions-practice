@@ -1,0 +1,20 @@
+#In this workflow we are going to see how to use if condition , like we can conditionally make a step run.
+
+name: If Condition Workflow 
+on: #on push we are saying only run this workflow if the branch includes one of the below
+  push: 
+    branches: 
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: "Run if the branch is main"
+        if: github.ref_name == 'main' #here we are using if keyword which will do the work for conditional running , and comparing the branch name in which we are committing the changes with the main branch name , if this is true then this step will run else not , NOTE := use single quotes ( '' ) when providing branch name else will get an error. 
+        run: "Running for main branch only"
+
+      - name: "Always Run"
+        run: echo "Running Always"
