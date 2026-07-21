@@ -1,15 +1,18 @@
+#In this we are learning how to create a reusable workflow
+
 name: Reusable Workflow 
 on: 
-  workflow_call: 
-    inputs:
-      name:
-        description: Enter The Name 
-        required: true
-        type: string
+  workflow_call: #for defining the reusable workflow we have to use this on method ,so that we can call this workflow from another workflow
+    inputs: #by using inputs keyword , we are defining what inputs needs to be taken
+      name: #name of the input it could be anything
+        description: Enter The Name  #description of the input we are taking 
+        required: true #whether it is mandatory or not
+        type: string #what would be the type of input
 
+#here mostly things are as usual workflow
 jobs:
     greeting:
       runs-on: ubuntu-latest
       steps:
         - name: Greeting Step
-          run: echo "Hy ${{ inputs.name }} , You are inside the reusable workflow"
+          run: echo "Hy ${{ inputs.name }} , You are inside the reusable workflow" #here ${{inputs.name}} by using this we are accessing the input provided by another workflow for now we are just echoing it.

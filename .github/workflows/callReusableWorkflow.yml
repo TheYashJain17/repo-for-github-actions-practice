@@ -1,9 +1,14 @@
+#This workflow is made to test the reusable workflow , mostly things are same here as usual workflow just little changes
+
 name: Call Reusable Workflow 
-on: workflow_dispatch
+on: workflow_dispatch #manually triggering the workflow could go with push event also
 
 
 jobs:
   call-greeting:
-    uses: ./.github/workflows/reusableWorkflow.yml
-    with:
-      name: "Lucifer"
+    uses: ./.github/workflows/reusableWorkflow.yml #now here we are importing the reusable workflow just like we import any file/folder into another file
+    with: #with the help of with keyword we are providing the inputs which we need to pass in the reusable workflow as we defined
+      name: "Lucifer" #make sure to take the exact variable name which we defined in the reusable workflow
+
+#when we will run this we would be able to see that this workflow is calling reusable workflow internally and inside that the name would be same which
+#we passed here
