@@ -1,10 +1,15 @@
 name: Reusable Workflow 
 on: 
   workflow_call: 
+    inputs:
+      name:
+        description: Enter The Name 
+        required: true
+        type: string
 
 jobs:
     greeting:
       runs-on: ubuntu-latest
       steps:
         - name: Greeting Step
-          run: echo "Welcome To Reusable Workflow"
+          run: echo "Hy ${{ inputs.name }} , You are inside the reusable workflow"
