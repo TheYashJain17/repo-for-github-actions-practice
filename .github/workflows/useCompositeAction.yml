@@ -1,0 +1,10 @@
+name: Using Created Composite Action
+on: 
+  - workflow_dispatch
+
+jobs:
+  usingcompositeaction:
+      runs-on: "ubuntu-latest"
+      steps:
+        - name: Installing Python and nodejs
+          uses: ./.github/actions/build_nodejs_project
