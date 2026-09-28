@@ -6,5 +6,9 @@ jobs:
   usingcompositeaction:
       runs-on: "ubuntu-latest"
       steps:
+      
+        - name: Clonning Code
+          uses: actions/checkout@v4
+
         - name: Installing Python and nodejs
           uses: ./.github/actions/build_nodejs_project
