@@ -1,0 +1,42 @@
+# So composite actions are just like the github reusable workflows, except these are much simpler in comparsion of it and have less
+# functions to perform
+# When we create a composite action inside another repository (so that can use it at multiple places) we need to make sure to create teh file
+# in the root of the repository and the name should be action.yml (we cannot change it) then only this will work.
+
+# This should be under .github/actions folder , this cannot be inside .github/workflows as this is not a workflow file.
+
+# Lets create a composite action to see it in action.
+
+# When using this action in another repo , so we have to use the full path repoowner/reponame/branch(inside which this action exist).
+
+# when accessing the action from another repo make sure to change the repo setting inside which the action exist , so make sure to change access
+# settings of the repo under actions/general from not accessible to accessible from repo owned by the user.
+
+
+# And the repo inside which the action exist should be public else another repo wont be able to find the action when trying to access this repo action.
+
+# and somehow if you dont want to make the action repo public then make sure the visibility of the repo from which calling this action should also be
+# private then only it will work 
+
+# so it means either should be public or both should be private then only the composite action from another repo will work.
+
+name: Setup Python And Node
+description: "Setup nodejs and python" #description is important when creating an action
+
+runs:
+  using: "composite" #composite keyword is required when defining the action
+  steps:
+    - name: Setup Python
+      uses: "actions/setup-python@v2"
+      with:
+        python-version: '3.x'
+
+
+    - name: Setup Node JS
+      uses: "actions/setup-node@v4" 
+      with:
+        node-version: 22.x
+
+    - name: Setup Check
+      run: echo "Setup Completed Successfully"
+      shell: bash

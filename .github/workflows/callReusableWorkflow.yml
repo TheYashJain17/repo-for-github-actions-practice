@@ -6,7 +6,7 @@ on: workflow_dispatch #manually triggering the workflow could go with push event
 
 jobs:
   call-greeting:
-    uses: ./.github/workflows/reusableWorkflow.yml #now here we are importing the reusable workflow just like we import any file/folder into another file
+    uses: ./.github/workflows/reusableWorkflow.yml #now here we are importing the reusable workflow just like we import any file/folder into another file, here we have this file locally but lets say if we want to use it from some different repository then we have to give the full path like this :- accountName/repositoryName/.github/workflows/reusableWorkflow.yml , then full path till the file, this is how we can use the file from different repo also.
     with: #with the help of with keyword we are providing the inputs which we need to pass in the reusable workflow as we defined
       name: "Lucifer" #make sure to take the exact variable name which we defined in the reusable workflow
 
